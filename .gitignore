@@ -3,3 +3,9 @@
 
 # General
 config/
+data/
+images/
+
+# pip
+Pipfile.lock
+Pipfile
