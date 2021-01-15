@@ -3,6 +3,7 @@
 
 # General
 config/
+tmp/
 
 # pip
 Pipfile.lock
