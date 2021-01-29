@@ -6,6 +6,9 @@ config/
 tmp/
 data/
 
+# SQLLITE
+*.sqlite
+
 # pip
 Pipfile.lock
 Pipfile
