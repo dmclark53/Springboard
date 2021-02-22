@@ -12,3 +12,6 @@ data/
 # pip
 Pipfile.lock
 Pipfile
+
+# PyCharm
+.idea/
