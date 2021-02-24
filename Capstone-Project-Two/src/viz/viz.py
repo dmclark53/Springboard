@@ -44,8 +44,17 @@ def plot_kdes(df, columns_list, num_cols, exclude_zeros=False):
 
 def plot_cat_hists(df, cat_counts, max_count, min_count=3, response_var='status_group'):
     for column in cat_counts[(cat_counts >= min_count) & (cat_counts < max_count)].index:
-        df[column] = df[column].cat.as_ordered()
+        df.loc[:, column] = df.loc[:, column].cat.as_ordered()
         fix, ax = plt.subplots(figsize=(12, 4))
         sns.histplot(x=column, data=df, hue=response_var, multiple='stack', ax=ax)
         plt.tight_layout()
         plt.show()
+
+
+# def plot_cat_hists(df, cat_columns, response_var='status_group_label'):
+#     for column in cat_columns:
+#         df[column] = df[column].cat.as_ordered()
+#         fix, ax = plt.subplots(figsize=(12, 4))
+#         sns.histplot(x=column, data=df, hue=response_var, multiple='stack', ax=ax)
+#         plt.tight_layout()
+#         plt.show()
