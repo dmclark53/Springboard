@@ -58,11 +58,3 @@ def plot_cat_hists(df, cat_counts, max_count, min_count=3, response_var='status_
         plt.tight_layout()
         plt.show()
 
-
-# def plot_cat_hists(df, cat_columns, response_var='status_group_label'):
-#     for column in cat_columns:
-#         df[column] = df[column].cat.as_ordered()
-#         fix, ax = plt.subplots(figsize=(12, 4))
-#         sns.histplot(x=column, data=df, hue=response_var, multiple='stack', ax=ax)
-#         plt.tight_layout()
-#         plt.show()
