@@ -16,3 +16,7 @@ Pipfile
 # PyCharm
 .idea/
 __pycache__/
+
+# Images
+*.png
+*.dot
