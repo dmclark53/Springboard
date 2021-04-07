@@ -20,3 +20,6 @@ __pycache__/
 # Images
 *.png
 *.dot
+
+# Directories
+archive/
