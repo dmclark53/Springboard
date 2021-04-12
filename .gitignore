@@ -2,9 +2,11 @@
 .ipynb_checkpoints/
 
 # General
+archive/
 config/
-tmp/
 data/
+results/
+tmp/
 
 # SQLLITE
 *.sqlite
@@ -21,5 +23,3 @@ __pycache__/
 *.png
 *.dot
 
-# Directories
-archive/
