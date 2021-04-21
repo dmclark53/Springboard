@@ -6,7 +6,7 @@ import numpy as np
 import seaborn as sns
 
 
-def plot_ecdfs(df, columns_list, num_cols, exclude_zeros=False):
+def plot_ecdfs(df, columns_list, num_cols, exclude_zeros=False, figure_name=None):
 
     num_plots = len(columns_list)
     num_rows = num_plots // num_cols
@@ -24,7 +24,12 @@ def plot_ecdfs(df, columns_list, num_cols, exclude_zeros=False):
             sns.ecdfplot(x=column, data=df[non_zero], ax=next_ax)
         else:
             sns.ecdfplot(x=column, data=df, ax=next_ax)
+        next_ax.set_title(f'ECDF for {column}')
     plt.tight_layout()
+    if figure_name is not None:
+        plt.savefig(f'../reports/images/{figure_name}.png')
+    else:
+        pass
     plt.show()
 
 
