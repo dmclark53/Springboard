@@ -33,7 +33,7 @@ def plot_ecdfs(df, columns_list, num_cols, exclude_zeros=False, figure_name=None
     plt.show()
 
 
-def plot_kdes(df, columns_list, num_cols, exclude_zeros=False):
+def plot_kdes(df, columns_list, num_cols, exclude_zeros=False, save_figure=False):
 
     num_plots = len(columns_list)
     num_rows = num_plots // num_cols
@@ -52,23 +52,28 @@ def plot_kdes(df, columns_list, num_cols, exclude_zeros=False):
         else:
             sns.kdeplot(x=column, hue='status_group', data=df, ax=next_ax)
     plt.tight_layout()
+    if save_figure:
+        plt.savefig('../reports/images/kde_plots.png')
     plt.show()
 
 
-def plot_cat_hists(df, cat_counts, max_count=None, min_count=0, response_var='status_group'):
+def plot_cat_hists(df, cat_counts, max_count=None, min_count=0, response_var='status_group', save_figure=False):
 
     if max_count is None:
         max_count = cat_counts.max()
 
     columns_to_plot = cat_counts[(cat_counts >= min_count) & (cat_counts < max_count)].index.values
+    columns_to_plot = np.delete(columns_to_plot, np.where(columns_to_plot == response_var))
     num_rows = len(columns_to_plot)
 
-    fix, ax = plt.subplots(len(columns_to_plot), 1, figsize=(16, 4 * num_rows))
+    fix, ax = plt.subplots(len(columns_to_plot), 1, figsize=(16, 3 * num_rows))
     for i, column in enumerate(columns_to_plot):
         df.loc[:, column] = df.loc[:, column].cat.as_ordered()
         # print(f'{column}:')
         # print(f'{df.loc[:, column].unique()}')
         sns.histplot(x=column, data=df, hue=response_var, multiple='stack', ax=ax[i])
+    if save_figure:
+        plt.savefig('../reports/images/cat_hist_plots.png')
     plt.tight_layout()
     plt.show()
 
