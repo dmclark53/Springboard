@@ -4,7 +4,8 @@
 # General
 archive/
 config/
-data/
+data
+images/
 results/
 tmp/
 
