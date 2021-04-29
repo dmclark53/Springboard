@@ -66,14 +66,15 @@ def plot_cat_hists(df, cat_counts, max_count=None, min_count=0, response_var='st
     columns_to_plot = np.delete(columns_to_plot, np.where(columns_to_plot == response_var))
     num_rows = len(columns_to_plot)
 
+    sns.set(font_scale=1.5)
     fix, ax = plt.subplots(len(columns_to_plot), 1, figsize=(16, 3 * num_rows))
     for i, column in enumerate(columns_to_plot):
         df.loc[:, column] = df.loc[:, column].cat.as_ordered()
         # print(f'{column}:')
         # print(f'{df.loc[:, column].unique()}')
         sns.histplot(x=column, data=df, hue=response_var, multiple='stack', ax=ax[i])
+    plt.tight_layout()
     if save_figure:
         plt.savefig('../reports/images/cat_hist_plots.png')
-    plt.tight_layout()
     plt.show()
 
