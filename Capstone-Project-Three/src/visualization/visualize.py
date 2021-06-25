@@ -10,6 +10,13 @@ import numpy as np
 from  src import constants as con
 
 
+def count_images(df):
+    df_grouped = df.groupby('Morphology').count()
+    df_grouped.rename(columns={'Image Dir': 'Image Count'}, inplace=True)
+    df_sorted = df_grouped.sort_values(by='Image Count', ascending=False)
+    return df_sorted
+
+
 def display_images(image_list, num_cols):
     """
     Display a list of images from a list of image file names.
