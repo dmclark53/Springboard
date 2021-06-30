@@ -69,6 +69,23 @@ def display_images_by_channel(image_list):
     plt.show()
 
 
+def plot_maturity(df):
+    """
+    Create a donut plot to display image counts by maturity group.
+
+    :params df: Table of distribution in image counts by maturity group.
+    :type df: DataFrame
+    """
+    hole = plt.Circle((0, 0), 0.7, color='white')
+
+    plt.figure(figsize=(8, 8))
+    plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'green', 'blue'])
+    p = plt.gcf()
+    p.gca().add_artist(hole)
+    plt.title('Distribution in Image Counts by Maturity Group')
+    plt.show()
+
+
 def compute_image_stats(df):
     """
     Compute statistics for each leukocyte image in the dataset.
