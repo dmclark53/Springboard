@@ -119,7 +119,6 @@ def plot_image_stats(df):
     """
 
     channels = ['Red', 'Green', 'Blue']
-    palettes = ['Reds_r', 'Greens_r', 'Blues_r']
     metrics = ['Max', 'Min', 'Mean', 'Median']
 
     num_plots = len(metrics) * len(channels)
@@ -129,6 +128,10 @@ def plot_image_stats(df):
     count = 0
     for metric in metrics:
         for i, channel in enumerate(channels):
-            sns.boxplot(x='Morphology', y=f'{channel}_{metric}', data=df, palette=palettes[i], ax=ax[count])
+            sns.boxplot(x='Morphology', y=f'{channel}_{metric}', data=df, color=channel.lower(), ax=ax[count])
+            # Add transparency
+            for patch in ax[count].artists:
+                r, g, b, a = patch.get_facecolor()
+                patch.set_facecolor((r, g, b, 0.7))
             count += 1
     plt.show()
