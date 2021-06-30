@@ -9,6 +9,8 @@ PROJECT_DIR = os.path.split(os.getcwd())[0]
 DATA_DIR = os.path.join(PROJECT_DIR, 'data')
 RAW_DATA_DIR = os.path.join(DATA_DIR, 'raw')
 RAW_IMAGES_DIR = os.path.join(RAW_DATA_DIR, 'AML-Cytomorphology')
+PROCESSED_DATA_DIR = os.path.join(DATA_DIR, 'processed')
 
 # Reference directory
 REFERENCES_DIR = os.path.join(PROJECT_DIR, 'references')
+IMAGE_STATS = 'image_stats.csv'
