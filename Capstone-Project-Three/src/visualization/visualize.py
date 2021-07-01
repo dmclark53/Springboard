@@ -12,6 +12,14 @@ import numpy as np
 from  src import constants as con
 
 
+def check_image_shapes(df):
+    shapes_list = []
+    for image_file in df['Image Dir']:
+        img = cv.imread(os.path.join(con.RAW_IMAGES_DIR, image_file))
+        shapes_list.append(img.shape)
+    return set(shapes_list)
+
+
 def count_images(df):
     df_grouped = df.groupby('Morphology').count()
     df_grouped.rename(columns={'Image Dir': 'Image Count'}, inplace=True)
@@ -63,7 +71,7 @@ def display_images_by_channel(image_list):
             fig.add_subplot(num_rows, num_cols, counter)
             plt.title(f"{image_file.split('/')[0]} ({colors[channel][:-1].lower()})")
             plt.axis('off')
-            plt.imshow(img[:, :, channel], cmap=colors[channel])
+            plt.imshow(img[:, :, channel], cmap=colors[channel], alpha=0.9)
             counter += 1
     plt.tight_layout()
     plt.show()
@@ -78,11 +86,12 @@ def plot_maturity(df):
     """
     hole = plt.Circle((0, 0), 0.7, color='white')
 
-    plt.figure(figsize=(8, 8))
-    plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'green', 'blue'])
+    plt.figure(figsize=(6, 6))
+    plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'green', 'blue'],
+            textprops={'fontsize': 12})
     p = plt.gcf()
     p.gca().add_artist(hole)
-    plt.title('Distribution in Image Counts by Maturity Group')
+    plt.title('Distribution in Image Counts by Maturity Group', fontsize=13)
     plt.show()
 
 
