@@ -161,3 +161,23 @@ def plot_image_stats(df):
                 patch.set_facecolor((r, g, b, 0.7))
             count += 1
     plt.show()
+
+
+def compare_class_spread(y_train, y_test):
+    """
+    Compare the distribution in classes between the training and test sets.
+
+    :param y_train: The training labels.
+    :type y_train: np.array
+    :param y_test: The test labels.
+    :type y_test: np.array
+    :return: A fractional comparison of class differences.
+    :rtype: DataFrame
+    """
+
+    y_train_value_counts = pd.Series(y_train).value_counts(normalize=True)
+    y_test_value_counts = pd.Series(y_test).value_counts(normalize=True)
+    y_value_counts = pd.concat([y_train_value_counts, y_test_value_counts], axis=1)
+    y_value_counts.columns = ['y_train', 'y_test']
+    y_value_counts['y_train/y_test'] = y_value_counts['y_train'] / y_value_counts['y_test']
+    return y_value_counts
