@@ -180,4 +180,15 @@ def compare_class_spread(y_train, y_test):
     y_value_counts = pd.concat([y_train_value_counts, y_test_value_counts], axis=1)
     y_value_counts.columns = ['y_train', 'y_test']
     y_value_counts['y_train/y_test'] = y_value_counts['y_train'] / y_value_counts['y_test']
+
+    # Plot fractional differences
+    y_value_counts = y_value_counts.reset_index()
+    y_value_counts.rename(columns={'index': 'Morphology'}, inplace=True)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax = sns.pointplot(x='Morphology', y='y_train/y_test', data=y_value_counts, color='blue', height=5, ax=ax)
+    ax.set_title('Fractional Difference in Class Counts')
+    ax.set_ylabel('y_train/y_test')
+    plt.show()
+
     return y_value_counts
