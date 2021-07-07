@@ -87,7 +87,7 @@ def plot_maturity(df):
     hole = plt.Circle((0, 0), 0.7, color='white')
 
     plt.figure(figsize=(6, 6))
-    plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'green', 'blue'],
+    plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'magenta', 'cyan'],
             textprops={'fontsize': 12})
     p = plt.gcf()
     p.gca().add_artist(hole)
