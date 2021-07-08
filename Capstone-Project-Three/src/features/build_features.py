@@ -15,7 +15,7 @@ def flatten_images(image_file_list):
     start = time()
     for image_file in image_file_list:
         image = cv.imread(os.path.join(con.RAW_IMAGES_DIR, image_file))
-        flattened_images.append(image.flatten)
+        flattened_images.append(image.flatten())
     end = time()
     elapsed = end - start
     time_unit = 'seconds'
@@ -25,5 +25,17 @@ def flatten_images(image_file_list):
     print(f'It took {elapsed:0.3f} {time_unit} to load and flatten {len(image_file_list)} images.')
     flattened_images_array = np.array(flattened_images)
     memory_size = flattened_images_array.size * flattened_images_array.itemsize
-    print(f'The array of flattened images takes up {int(memory_size)} bytes of memory.')
+    memory_unit = 'bytes'
+    if memory_size >= 1e9:
+        memory_size = memory_size / 1e9
+        memory_unit = 'Gb'
+    elif memory_size >= 1e6:
+        memory_size = memory_size / 1e6
+        memory_unit = 'Mb'
+    elif memory_size >= 1e3:
+        memory_size = memory_size / 1e3
+        memory_unit = 'Kb'
+    else:
+        pass
+    print(f'The array of flattened images takes up {memory_size:0.3f} {memory_unit} of memory.')
     return flattened_images_array
