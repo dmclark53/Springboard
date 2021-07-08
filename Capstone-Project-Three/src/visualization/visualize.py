@@ -1,15 +1,15 @@
 # visualize.py
 import os
-import pandas as pd
-import seaborn as sns
 import sys
 sys.path.append('..')
 
 import cv2 as cv
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import seaborn as sns
 
-from  src import constants as con
+from src import constants as con
 
 
 def check_image_shapes(df):
