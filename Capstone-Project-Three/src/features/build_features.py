@@ -10,11 +10,15 @@ import numpy as np
 from src import constants as con
 
 
-def flatten_images(image_file_list):
+def flatten_images(image_file_list, rescale=False):
     flattened_images = []
     start = time()
     for image_file in image_file_list:
         image = cv.imread(os.path.join(con.RAW_IMAGES_DIR, image_file))
+        if rescale:
+            scale = 0.5
+            new_size = (int(image.shape[1]*scale), int(image.shape[0]*scale))
+            image = cv.resize(image, new_size)
         flattened_images.append(image.flatten())
     end = time()
     elapsed = end - start
