@@ -10,7 +10,7 @@ import numpy as np
 from src import constants as con
 
 
-def preprocess_images(image_file_list, flatten=False, rescale=False):
+def preprocess_images(image_file_list, flatten=False, rescale=False, gray=False):
     preprocessed_images = []
     start = time()
     print('Preprocessing Images:')
@@ -18,8 +18,12 @@ def preprocess_images(image_file_list, flatten=False, rescale=False):
         print(' * Flattening.')
     if rescale:
         print(' * Rescaling.')
+    if gray:
+        print(' * Convert to grayscale.')
     for i, image_file in enumerate(image_file_list):
         image = cv.imread(os.path.join(con.RAW_IMAGES_DIR, image_file))
+        if gray:
+            image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
         if rescale:
             scale = 0.5
             new_size = (int(image.shape[1]*scale), int(image.shape[0]*scale))
