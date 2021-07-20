@@ -10,6 +10,7 @@ DATA_DIR = os.path.join(PROJECT_DIR, 'data')
 RAW_DATA_DIR = os.path.join(DATA_DIR, 'raw')
 RAW_IMAGES_DIR = os.path.join(RAW_DATA_DIR, 'AML-Cytomorphology')
 PROCESSED_DATA_DIR = os.path.join(DATA_DIR, 'processed')
+MODELS_DIR = os.path.join(PROJECT_DIR, 'models')
 
 # Reference directory
 REFERENCES_DIR = os.path.join(PROJECT_DIR, 'references')
