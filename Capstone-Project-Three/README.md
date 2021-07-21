@@ -1,7 +1,7 @@
 Capstone-Project-Three
 ==============================
 
-This is my final capstone project for the Data sScience program at Springboard.
+This is my final capstone project for the Data Science program at Springboard.
 
 Project Organization
 ------------
