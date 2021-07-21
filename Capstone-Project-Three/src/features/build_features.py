@@ -5,7 +5,9 @@ sys.path.append('..')
 from time import time
 
 import cv2 as cv
+from imblearn.over_sampling import RandomOverSampler
 import numpy as np
+import pandas as pd
 
 from src import constants as con
 
@@ -53,3 +55,35 @@ def preprocess_images(image_file_list, flatten=False, gray=False, rescale=False,
         pass
     print(f'The array of preprocessed images takes up {memory_size:0.3f} {memory_unit} of memory.')
     return flattened_images_array
+
+
+def bootstrap_images(X, y):
+    """
+    Boostrap the training data with replacement.
+
+    :param X: Training data features.
+    :type X: np.ndarray
+    :param y: Training data labels.
+    :type y: np.ndarray
+    """
+
+    # Find majority class
+    class_fractions = pd.Series(y).value_counts(normalize=True)
+    max_class_fraction = class_fractions.max()
+    majority_class = class_fractions[class_fractions == max_class_fraction].index.values[0]
+    df_train = pd.DataFrame(X, index=y)
+    df_majority_class = df_train.loc[majority_class]
+
+    # Upsample majority class by 10%
+    majority_class_sample = df_majority_class.sample(frac=0.1, replace=True, random_state=42)
+
+    # Combine with original training data
+    df_upsampled_majority_class = pd.concat([df_train, majority_class_sample], axis=0)
+    X_upsampled_majority_class = df_upsampled_majority_class.values
+    y_upsampled_majority_class = df_upsampled_majority_class.index.values
+
+    # Bootstrap training data to match size of upsampled majority class
+    ros = RandomOverSampler(random_state=42)
+    X_boostrapped, y_boostrapped = ros.fit_resample(X_upsampled_majority_class, y_upsampled_majority_class)
+
+    return X_boostrapped, y_boostrapped
