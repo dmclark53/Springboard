@@ -192,3 +192,40 @@ def compare_class_spread(y_train, y_test):
     plt.show()
 
     return y_value_counts
+
+
+def display_preprocessed(X, y, num_cols):
+    """
+    Display the preprocessed images.
+
+    :param X: List of preprossed images.
+    :type X: list
+    :param y: The labels in the dataset.
+    :param num_cols: The number of columns to use to arrange the images.
+    :type num_cols: int
+    """
+
+    X_list = [[x] for x in X]
+    df_preprocessed = pd.DataFrame({'y': y, 'X': X_list})
+    preprocessed_grouped = df_preprocessed.groupby('y').first()
+    images = preprocessed_grouped['X'].tolist()
+    morphologies = preprocessed_grouped.index.tolist()
+
+    num_plots = len(morphologies)
+    num_rows = int(np.ceil(num_plots / num_cols))
+
+    fig = plt.figure(figsize=(12, 12))
+    for i, image in enumerate(images):
+
+        image = np.array(image)
+
+        if len(image.shape) == 2:
+            dimension = int(np.sqrt(image.shape[1]))
+            image = image.reshape((dimension, dimension))
+        fig.add_subplot(num_rows, num_cols, i+1)
+        plt.title(morphologies[i])
+        plt.axis('off')
+        plt.imshow(image)
+    plt.tight_layout()
+    plt.show()
+
