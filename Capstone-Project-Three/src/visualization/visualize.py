@@ -27,7 +27,7 @@ def count_images(df):
     return df_sorted
 
 
-def display_images(image_list, num_cols):
+def display_images(image_list, num_cols, figure_name=None):
     """
     Display a list of images from a list of image file names.
 
@@ -48,10 +48,14 @@ def display_images(image_list, num_cols):
         plt.axis('off')
         plt.imshow(img)
     plt.tight_layout()
+    if figure_name is not None:
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
 
 
-def display_images_by_channel(image_list):
+def display_images_by_channel(image_list, figure_name=None):
     """
     Display images by channel.
 
@@ -74,10 +78,14 @@ def display_images_by_channel(image_list):
             plt.imshow(img[:, :, channel], cmap=colors[channel], alpha=0.9)
             counter += 1
     plt.tight_layout()
+    if figure_name is not None:
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
 
 
-def plot_maturity(df):
+def plot_maturity(df, figure_name=None):
     """
     Create a donut plot to display image counts by maturity group.
 
@@ -92,6 +100,10 @@ def plot_maturity(df):
     p = plt.gcf()
     p.gca().add_artist(hole)
     plt.title('Distribution in Image Counts by Maturity Group', fontsize=13)
+    if figure_name is not None:
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
 
 
@@ -136,7 +148,7 @@ def gather_image_stats(df):
     return df_image_stats
 
 
-def plot_image_stats(df):
+def plot_image_stats(df, figure_name=None):
     """
     Create box plots for all image statistics. Each box plot is organized by image color channel and metric.
 
@@ -160,6 +172,10 @@ def plot_image_stats(df):
                 r, g, b, a = patch.get_facecolor()
                 patch.set_facecolor((r, g, b, 0.7))
             count += 1
+    if figure_name is not None:
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
 
 

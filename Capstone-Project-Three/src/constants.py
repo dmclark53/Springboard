@@ -15,3 +15,7 @@ MODELS_DIR = os.path.join(PROJECT_DIR, 'models')
 # Reference directory
 REFERENCES_DIR = os.path.join(PROJECT_DIR, 'references')
 IMAGE_STATS = 'image_stats.csv'
+
+# Reports directory
+REPORTS_DIR = os.path.join(PROJECT_DIR, 'reports')
+FIGURES_DIR = os.path.join(REPORTS_DIR, 'figures')
