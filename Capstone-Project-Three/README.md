@@ -12,6 +12,8 @@ The goal of this project is to address the following question: How can the docto
 
 This work is based off the [A Single-cell Morphological Dataset of Leukocytes from AML Patients and Non-malignant Controls (AML-Cytomorphology_LMU)](https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=61080958#61080958bcab02c187174a288dbcbf95d26179e8) dataset taken from the Cancer Imaging Archive.
 
+### Data Citation:
+"Matek, C., Schwarz, S., Marr, C., & Spiekermann, K. (2019). A Single-cell Morphological Dataset of Leukocytes from AML Patients and Non-malignant Controls [Data set]. The Cancer Imaging Archive. [https://doi.org/10.7937/tcia.2019.36f5o9ld](https://doi.org/10.7937/tcia.2019.36f5o9ld)".
 
 
 --------
