@@ -66,6 +66,9 @@ def display_images_by_channel(image_list, figure_name=None):
     num_rows = len(image_list)
     img_tmp = cv.imread(os.path.join(con.RAW_IMAGES_DIR, image_list[0]))
     num_cols = img_tmp.shape[2]
+
+    plt.rcParams['font.size'] = '16'
+
     fig = plt.figure(figsize=(12, 48))
     counter = 1
     colors = ['Reds', 'Blues', 'Greens']
@@ -92,14 +95,16 @@ def plot_maturity(df, figure_name=None):
     :params df: Table of distribution in image counts by maturity group.
     :type df: DataFrame
     """
+
     hole = plt.Circle((0, 0), 0.7, color='white')
 
     plt.figure(figsize=(6, 6))
     plt.pie(df['Count'].tolist(), labels=df.index.to_list(), colors=['red', 'magenta', 'cyan'],
-            textprops={'fontsize': 12})
+            textprops={'fontsize': 16})
     p = plt.gcf()
     p.gca().add_artist(hole)
-    plt.title('Distribution in Image Counts by Maturity Group', fontsize=13)
+    plt.title('Distribution in Image Counts by Maturity Group', fontsize=16)
+    plt.tight_layout()
     if figure_name is not None:
         plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
     else:

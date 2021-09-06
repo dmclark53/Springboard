@@ -1,12 +1,16 @@
 # evaluate_model.py
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
+from src import constants as con
 
-def plot_confusion_matrix(y, y_pred, label_encodings):
+
+def plot_confusion_matrix(y, y_pred, label_encodings, figure_name=None):
 
     y_flat = np.argmax(y, axis=1)
     y_pred_flat = np.argmax(y_pred, axis=1)
@@ -18,10 +22,15 @@ def plot_confusion_matrix(y, y_pred, label_encodings):
     plt.title('Confusion Matrix')
     plt.ylabel('Actual Values')
     plt.xlabel('Predicted Values')
+    if figure_name is not None:
+        plt.rcParams['font.size'] = '16'
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
 
 
-def plot_train_val_losses(results):
+def plot_train_val_losses(results, figure_name=None):
 
     df_history = pd.DataFrame(results.history)
 
@@ -39,4 +48,9 @@ def plot_train_val_losses(results):
     ax.set_xticklabels(xtick_values)
     ax.set_xlabel('epoch')
     ax.set_ylabel('loss')
+    if figure_name is not None:
+        plt.rcParams['font.size'] = '16'
+        plt.savefig(os.path.join(con.FIGURES_DIR, f'{figure_name}.png'))
+    else:
+        pass
     plt.show()
